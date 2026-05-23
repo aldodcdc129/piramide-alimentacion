@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pirámide de Alimentación Saludable</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════  TOP BAR  ═══════════════════════════ -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="topbar__logo">🥗</span>
+      <h1 class="topbar__title">Pirámide de Alimentación Saludable</h1>
+      <div class="topbar__controls">
+        <button id="soundBtn" class="ctrl-btn" title="Sonido">🔇</button>
+        <button id="darkBtn"  class="ctrl-btn" title="Modo oscuro">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════  HERO  ═══════════════════════════ -->
+  <main class="hero">
+    <p class="hero__subtitle">Haz clic en cada nivel para descubrir sus beneficios</p>
+
+    <!-- ─────── PYRAMID ─────── -->
+    <div class="pyramid-wrap" id="pyramidWrap">
+
+      <!-- LEVEL 4 — TIP (azúcar) -->
+      <div class="pyramid__tier tier--4" data-level="4" tabindex="0" role="button" aria-label="Nivel 4: Consumo ocasional">
+        <div class="tier__shape">
+          <span class="tier__icons">🍬🥤🍕</span>
+          <span class="tier__label">Consumo Ocasional</span>
+        </div>
+      </div>
+
+      <!-- LEVEL 3 — grasas saludables -->
+      <div class="pyramid__tier tier--3" data-level="3" tabindex="0" role="button" aria-label="Nivel 3: Grasas saludables">
+        <div class="tier__shape">
+          <span class="tier__icons">🫒🥑🌰</span>
+          <span class="tier__label">Grasas Saludables</span>
+        </div>
+      </div>
+
+      <!-- LEVEL 2 — proteínas -->
+      <div class="pyramid__tier tier--2" data-level="2" tabindex="0" role="button" aria-label="Nivel 2: Proteínas y lácteos">
+        <div class="tier__shape">
+          <span class="tier__icons">🥩🥚🧀🥜</span>
+          <span class="tier__label">Proteínas &amp; Lácteos</span>
+        </div>
+      </div>
+
+      <!-- LEVEL 1 — BASE -->
+      <div class="pyramid__tier tier--1" data-level="1" tabindex="0" role="button" aria-label="Nivel 1: Base de la alimentación">
+        <div class="tier__shape">
+          <span class="tier__icons">💧🍎🥦🌾</span>
+          <span class="tier__label">Base: Frutas, Verduras, Cereales &amp; Agua</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- /pyramid-wrap -->
+
+    <p class="hero__hint">↑ &nbsp;Pirámide interactiva — toca o cliquea cualquier nivel</p>
+  </main>
+
+  <!-- ═══════════════════════════  MODAL  ═══════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" id="modal">
+      <button class="modal__close" id="modalClose" aria-label="Cerrar">✕</button>
+
+      <div class="modal__badge" id="modalBadge"></div>
+      <h2 class="modal__title" id="modalTitle"></h2>
+      <p  class="modal__sub"   id="modalSub"></p>
+
+      <div class="modal__body">
+        <div class="modal__col">
+          <div class="info-card" id="descCard">
+            <h3>📖 Descripción</h3>
+            <p id="modalDesc"></p>
+          </div>
+          <div class="info-card" id="freqCard">
+            <h3>⏱ Frecuencia Recomendada</h3>
+            <p id="modalFreq"></p>
+          </div>
+        </div>
+        <div class="modal__col">
+          <div class="info-card" id="benCard">
+            <h3>✨ Beneficios</h3>
+            <ul id="modalBen"></ul>
+          </div>
+          <div class="info-card" id="exCard">
+            <h3>🍽 Ejemplos de Alimentos</h3>
+            <div class="food-tags" id="modalEx"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-back" id="btnBack">← Volver a la Pirámide</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════  FOOTER  ═══════════════════════════ -->
+  <footer class="footer">
+    <p>🌱 <strong>Pirámide de Alimentación Saludable</strong> — Proyecto educativo interactivo &nbsp;|&nbsp; Diseñado con ❤️ para una vida más sana &nbsp;|&nbsp; © 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
