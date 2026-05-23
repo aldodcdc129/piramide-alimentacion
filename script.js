@@ -137,6 +137,37 @@ const tiers        = document.querySelectorAll('.pyramid__tier');
 const studentBtns  = document.querySelectorAll('.btn-outline[data-level]');
 
 /* ══════════════════════════════════════════════════════════
+   SPEECH — Web Speech API (no libraries needed)
+   ══════════════════════════════════════════════════════════ */
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  // cancel any ongoing speech
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang  = 'en-US';
+  utter.rate  = 0.9;   // slightly slower — clearer for learners
+  utter.pitch = 1;
+  window.speechSynthesis.speak(utter);
+}
+
+/** Creates a small 🔊 button that calls speak() */
+function makeSpeakBtn(text, title = '') {
+  const btn = document.createElement('button');
+  btn.className   = 'speak-btn';
+  btn.innerHTML   = '🔊';
+  btn.title       = title || `Listen: "${text}"`;
+  btn.setAttribute('aria-label', `Pronounce: ${text}`);
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // don't close modal
+    speak(text);
+    // visual feedback
+    btn.classList.add('speaking');
+    setTimeout(() => btn.classList.remove('speaking'), 1200);
+  });
+  return btn;
+}
+
+/* ══════════════════════════════════════════════════════════
    LOADER
    ══════════════════════════════════════════════════════════ */
 window.addEventListener('load', () => {
@@ -157,7 +188,11 @@ function openModal(level) {
   badge.textContent = d.emoji;
   badge.style.background = d.color;
 
-  document.getElementById('modalTitle').textContent   = d.title;
+  // title + 🔊 button to pronounce the food group name
+  const titleEl = document.getElementById('modalTitle');
+  titleEl.textContent = d.title;
+  titleEl.appendChild(makeSpeakBtn(d.title, `Listen: "${d.title}"`));
+
   document.getElementById('modalStudent').textContent = d.student;
   document.getElementById('modalDesc').textContent    = d.desc;
   document.getElementById('modalFreq').textContent    = d.freq;
@@ -171,13 +206,14 @@ function openModal(level) {
     benEl.appendChild(li);
   });
 
-  // food example tags
+  // food example tags — each with a 🔊 pronounce button
   const exEl = document.getElementById('modalEx');
   exEl.innerHTML = '';
   d.examples.forEach(ex => {
     const span = document.createElement('span');
     span.className = 'food-tag';
     span.textContent = ex;
+    span.appendChild(makeSpeakBtn(ex));
     exEl.appendChild(span);
   });
 
@@ -359,3 +395,4 @@ window.addEventListener('scroll', () => {
 console.log('%c🌿 Healthy Food Pyramid', 'font-size:1.3rem;color:#3a7d5f;font-weight:bold;');
 console.log('%c Interactive Nutrition Guide — Group of 5 Students', 'color:#7a6e58;font-size:.9rem;');
 console.log('Team: De la Cruz · Zurita · Aldo · Bustamante · Fiorela');
+
